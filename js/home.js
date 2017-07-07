@@ -93,7 +93,7 @@ function onSignIn(googleUser) {
 
         function setupWebSocket () {
           this.ws = new WebSocket('ws://' + window.location.host + '/register/' + userData.id)
-          updateSocket.onmessage = (event) => {
+          this.ws.onmessage = (event) => {
             container.html(event.data)
             container.animate({ scrollTop: container.prop("scrollHeight")}, 1000)
           }
@@ -101,15 +101,7 @@ function onSignIn(googleUser) {
             setTimeout(setupWebSocket, 1000);
           }
         }
-
-        const updateSocket = new WebSocket('ws://' + window.location.host + '/register/' + userData.id)
-        updateSocket.onmessage = (event) => {
-          container.html(event.data)
-          container.animate({ scrollTop: container.prop("scrollHeight")}, 1000)
-        }
-        updateSocket.onclose = () => {
-
-        }
+	setupWebSocket()
       })
 }
 
