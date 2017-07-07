@@ -4,7 +4,7 @@ const _ = require('lodash')
 const bodyParser = require('body-parser')
 const pug = require('pug')
 const expressWs = require('express-ws')
-const https = require('http')
+const https = require('https')
 
 const port = process.env.PORT
 
@@ -64,7 +64,7 @@ fs.readFile('chatLog.json', 'utf8', function (err, data) {
 
 function init() {
   const app = express()
-  expressWs(app, https.createServer(app))
+  expressWs(app, https.createServer({}, app))
 
   var currentUsers = {}
   var appData = this.appData
